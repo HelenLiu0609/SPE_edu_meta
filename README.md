@@ -1,7 +1,9 @@
 # SPE_edu_meta
 ## About 
 The current repo contains datasheets and scripts used to generate the results in the article "The Effectiveness of Self: A Meta-analysis of Using Self-Referential Encoding in Education".
-## R environment - R studio Version 1.4.1717
+## R environment 
+R studio Version 1.4.1717
+
 - tidyverse: 1.3.1  #for data pre-processing 
 - esc: 0.5.1 #calculate effect size and variance from given data
 - irr: 0.84.1 #calculate the proportion of overall agreement of two raters
