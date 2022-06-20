@@ -15,6 +15,6 @@ The current repo contains datasheets and scripts used to generate the results in
 - main_analysis.Rmd #used to perform ramdom effect model of effect size, sensitivity analysis, test for publication bias and subgroup analysis
 # Main results
 The analysis was based on data from 20 independent samples, including 1082 students from 13 primary studies identified through a systematic literature search. Results from random effect models show that incorporating self-referential encoding improved learning outcomes (g = 0.404, 95% CI [0.18, 0.62]). 
-![Forest plot](https://github.com/)
+![Forest plot](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/figures/forest_overall.jpeg)
 
 Note: The effect sizes (Hedges' g) and confidence intervals are shown by points and lines, respectively. The diamond on the bottom depicts the overall effect size, with the width indicating the corresponding confidence interval.
