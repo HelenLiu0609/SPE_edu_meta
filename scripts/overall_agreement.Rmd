@@ -1,0 +1,84 @@
+---
+title: "SPE_edu_meta_overall_agreement"
+author: "HelenLiu"
+output: html_document
+---
+## This script is used to calculate the proportion of overall agreement of two raters invloved in the coding procedure. ##
+```{r import package}
+library(irr)
+```
+
+```{r proportion of overall agreement}
+## Computes simple and extended percentage agreement among raters
+
+## author & publication year
+data1 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",19),"incorrect")
+)
+irr::agree(data1, tolerance=0)
+
+##N proportion of female subjects
+data2 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data2, tolerance=0)
+
+##sample size
+data3 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data3, tolerance=0)
+
+##average age of subjects 
+data4 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data4, tolerance=0)
+
+##cohort of subjects 
+data5 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data5, tolerance=0)
+
+##valence of materials 
+data6 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data6, tolerance=0)
+
+##form of learning materials 
+data7 <- data.frame(
+  A = c(rep("correct",20)),
+  B = c(rep("correct",20))
+)
+irr::agree(data7, tolerance=0)
+
+##research context
+data8 <- data.frame(
+  A = c(rep("correct",18),rep("incorrect",2)),
+  B = c(rep("correct",20))
+)
+irr::agree(data8, tolerance=0)
+
+##indicators of learning results 
+data9 <- data.frame(
+  A = c(rep("correct",45)),
+  B = c(rep("correct",42),rep("incorrect",3))
+)
+irr::agree(data9, tolerance=0)
+
+##corresponding data analysis results
+data10 <- data.frame(
+  A = c(rep("correct",45)),
+  B = c(rep("correct",41),rep("incorrect",4))
+)
+irr::agree(data10, tolerance=0)
+```
+

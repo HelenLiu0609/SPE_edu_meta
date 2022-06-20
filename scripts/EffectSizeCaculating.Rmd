@@ -1,0 +1,640 @@
+---
+title: "SPE_edu_meta_independent_effect_size"
+author: "HelenLiu&Yikang Liu"
+output: html_document
+---
+## This script is used to calculate effect size for each independent sample ##
+
+```{r import pacakages}
+library(esc)
+```
+
+##define function to caulculate Hedges's  g
+#formula source: Cooper, Hedges, L. V., & Valentine, J. C. (2009). The handbook of research synthesis and meta-analysis (2nd ed.). Russell Sage Foundation.
+
+```{r define functions}
+#define function to cal g based on d
+hedge_g = function(d,df){
+g = d * (1 - 3/(4 * df - 1))
+return(g)
+}
+#define function to cal g based on F-test
+hedge_g_f = function(f, r, n, df){
+d = sqrt(2*f*(1-r)/n)
+v = (1/n + d**2/(2*n))*2*(1-r)
+g = hedge_g(d,df)
+return(c(d,g,v))
+}
+#define function to cal g based on z-test
+hedge_g_z = function(z, r, n, df, p){
+#d = z**(-1)*(p/2)*sqrt(2*(1-r)/n)
+d = z*sqrt(2*(1-r)/n)
+v = (1/n + d**2/(2*n))*2*(1-r)
+g = hedge_g(d,df)
+return(c(d,g,v))
+}
+```
+
+##Axelsson,2018
+
+```{r}
+
+e = hedge_g_z(2.14,0.49,23,22,0.033)
+
+es = e[2]
+  
+v = e[3]
+
+es
+
+v
+
+```
+
+##Cunningham et al. (2018) E1
+
+```{r}
+#2018
+#E1
+e = esc_mean_sd(
+  grp1m = 0.26, grp1sd = 0.14, grp1n = 30,
+  grp2m = 0.11, grp2sd = 0.11, grp2n = 30,
+  es.type="g")#self-owned vs. other-owned
+
+es1 = as.numeric(e[1])
+v1 = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 0.26, grp1sd = 0.14, grp1n = 30,
+  grp2m = 0.07, grp2sd = 0.10, grp2n = 30,
+  es.type="g")#self-owned vs. unowned
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+v = (v1 + v2 )/2
+es = (es1 + es2)/2
+
+
+es
+v
+```
+
+##Cunningham et al. (2018) E2
+
+```{r}
+#E2
+e = esc_mean_sd(
+  grp1m = 1.74, grp1sd = 1.23, grp1n = 45,
+  grp2m = 1.2, grp2sd = 1.13, grp2n = 45,
+  es.type="g")#self-owned vs. other-owned
+
+es1 = as.numeric(e[1])
+v1 = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 1.74, grp1sd = 1.23, grp1n = 45,
+  grp2m = 0.44, grp2sd = 0.90, grp2n = 45,
+  es.type="g")#self-owned vs. unowned
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+v = (v1 + v2 )/2
+es = (es1 + es2)/2
+
+
+es
+v
+```
+
+##D'Ailly,1997
+
+```{r}
+e = hedge_g_f(4.81, 0.6, 85, 82)
+
+es = e[2]
+  
+v = e[3]
+
+es
+
+v
+```
+
+##Ditman,2010 E1
+
+```{r}
+#d'(Action Items)
+
+X1 = esc_mean_se(
+grp1m = 1.16, grp1se = 0.11, grp1n = 36,
+grp2m = 1.41, grp2se = 0.08, grp2n = 36,
+r = 0.6,
+es.type="g")#I vs. HE
+
+X2 = esc_mean_se(
+grp1m = 1.68, grp1se = 0.08, grp1n = 36,
+grp2m = 1.41, grp2se = 0.08, grp2n = 36,
+r = 0.6,
+es.type="g")#YOU vs. HE
+
+x1 = as.numeric(X1[1])
+x2 = as.numeric(X2[1])
+v1 = as.numeric(X1[2])**2
+v2 = as.numeric(X2[2])**2
+
+es1 = (x1 + x2)/2
+
+#d'(Descriptive Items)
+
+X1 = esc_mean_se(
+grp1m = 1.85, grp1se = 0.12, grp1n = 36,
+grp2m = 1.81, grp2se = 0.14, grp2n = 36,
+r = 0.6,
+es.type="g")#I vs. HE
+
+X2 = esc_mean_se(
+grp1m = 1.94, grp1se = 0.12, grp1n = 36,
+grp2m = 1.81, grp2se = 0.14, grp2n = 36,
+r = 0.6,
+es.type="g")#YOU vs. HE
+
+x1 = as.numeric(X1[1])
+x2 = as.numeric(X2[1])
+v3 = as.numeric(X1[2])**2
+v4 = as.numeric(X2[2])**2
+es2 =  (x1 + x2)/2
+
+#RT(Action Items)
+
+X1 = esc_mean_se(
+grp1m = 1463.7, grp1se = 77.4, grp1n = 36,
+grp2m = 1356.6, grp2se = 80.0, grp2n = 36,
+r = 0.6,
+es.type="g")#I vs. HE
+X2 = esc_mean_se(
+grp1m = 1173.9, grp1se = 45.7, grp1n = 36,
+grp2m = 1356.6, grp2se = 80.0, grp2n = 36,
+r = 0.6,
+es.type="g")#YOU vs. HE
+x1 = as.numeric(X1[1])
+x2 = as.numeric(X2[1])
+v5 = as.numeric(X1[2])**2
+v6 = as.numeric(X2[2])**2
+es3 = (x1 + x2)/2
+
+#RT(Descriptive Items)
+x = c(1529.9,52.1,1463.2,49.9,1535.9,76.0)
+X1 = esc_mean_se(
+grp1m = x[1], grp1se = x[2], grp1n = 36,
+grp2m = x[5], grp2se = x[6], grp2n = 36,
+r = 0.6,
+es.type="g")#I vs. HE
+X2 = esc_mean_se(
+grp1m = x[3], grp1se = x[4], grp1n = 36,
+grp2m = x[5], grp2se = x[6], grp2n = 36,
+r = 0.6,
+es.type="g")#YOU vs. HE
+x1 = as.numeric(X1[1])
+x2 = as.numeric(X2[1])
+v7 = as.numeric(X1[2])**2
+v8 = as.numeric(X2[2])**2
+
+es4 =  (x1 + x2)/2
+
+es = es1 +es2 - es3 - es4 #es3, es4 is negative, they shoulded be inversed.
+v = (v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8)/8
+
+es
+v
+```
+
+##Dutke et al. (2016)
+
+```{r}
+#2016-1 study
+e = esc_mean_sd(
+  grp1m = 87, grp1sd = 7.3, grp1n = 29,
+  grp2m = 87.1, grp2sd = 7.6, grp2n = 30,
+  es.type="g")#understand
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 53.7, grp1sd = 13.4, grp1n = 29,
+  grp2m = 38.0, grp2sd = 13.1, grp2n = 30,
+  es.type="g")#transfer
+  
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+  
+#2016-1 restudy
+e = esc_mean_sd(
+  grp1m = 89.0, grp1sd = 7.5, grp1n = 29,
+  grp2m = 88.4, grp2sd = 8.1, grp2n = 30,
+  es.type="g")#understand
+
+es3 = as.numeric(e[1])
+v3  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 57.8, grp1sd = 14.7, grp1n = 29,
+  grp2m = 42.4, grp2sd = 14.4, grp2n = 30,
+  es.type="g")#transfer
+  
+es4 = as.numeric(e[1])
+v4  = as.numeric(e[2])**2
+
+es = (es1 + es2 + es3 + es4 )/4
+v = (v1 + v2 + v3 + v4 )/4
+
+es
+v
+```
+
+##Ginns and Fraser (2010)
+
+```{r}
+e1 = esc_t(t = 2.98,     
+      totaln = 40, 
+      es.type="g")
+#e2 = esc_t(t = 2.19,     
+     # totaln = 40, 
+      #es.type="g")
+es1 =  as.numeric(e1[1])
+#es2 =  as.numeric(e2[1])
+
+v1 = as.numeric(e1[2])**2
+#v2 = as.numeric(e2[2])**2
+
+#v = (v1 + v2 )/2
+
+#es = (es1 + es2 )/2
+
+
+es1
+v1
+```
+
+##Halpin,1984
+
+```{r}
+e1 = hedge_g_f(14.44, 0.6, 49, 46)
+e2 = hedge_g_f(18.47, 0.6, 49, 46)
+
+es = (e1[2] + e2[2])/2
+v = (e1[3] + e2[3])/2
+
+es
+v
+```
+
+##Kühl and Zander (2017) E1
+
+```{r}
+#2017
+#E1
+e = esc_mean_sd(
+  grp1m = 8.71, grp1sd = 2.06, grp1n = 39,
+  grp2m = 7.97, grp2sd = 2.41, grp2n = 38,
+  es.type="g")#factual
+
+es1 = as.numeric(e[1])
+v1 = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 3.44, grp1sd = 2.04, grp1n = 39,
+  grp2m = 4.41, grp2sd = 2.18, grp2n = 38,
+  es.type="g")#transfer
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+v = (v1 + v2 )/2
+es = (es1 + es2)/2
+
+
+es
+v
+```
+
+##Kühl and Zander (2017) E2
+
+```{r}
+#E2
+e = esc_mean_sd(
+  grp1m = 6.88, grp1sd = 3.04, grp1n = 38,
+  grp2m = 7.83, grp2sd = 2.26, grp2n = 33,
+  es.type="g")#factual
+
+es1 = as.numeric(e[1])
+v1 = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 3.13, grp1sd = 1.70, grp1n = 38,
+  grp2m = 4.24, grp2sd = 2.03, grp2n = 33,
+  es.type="g")#transfer
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+v = (v1 + v2 )/2
+es = (es1 + es2)/2
+
+
+es
+v
+```
+
+##Kühl and Münzer (2021) G1
+
+```{r}
+#Kuhl,2021 G1:Happy retain
+x = c(33,7.29,3.04,32,5.55,3.07)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es1 = as.numeric(e[1])
+v1 = as.numeric(e[2])**2
+
+#Kuhl,2021 G1:Happy transfer
+x = c(33,4.32,1.65,32,4.02,1.99)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+v = (v1 + v2 )/2
+es = (es1 + es2)/2
+
+
+es
+v
+```
+
+##Kühl and Münzer (2021) G2
+
+```{r}
+#Kuhl,2021 G2:Sad retain
+x = c(30,6.32,3.35,30,7.93,3.07)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es3 = as.numeric(e[1])
+v3 = as.numeric(e[2])**2
+
+#Kuhl,2021 G2:Sad transfer
+x = c(30,3.42,1.95,30,4.52,1.92)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+v4  = as.numeric(e[2])**2
+es4 = as.numeric(e[1])
+
+v = ( v3 + v4)/2
+es = (es3 + es4)/2
+
+
+es
+v
+```
+
+##Li et al. (2021), E1
+
+```{r}
+e = esc_mean_sd(
+  grp1m = 738.933, grp1sd = 26.210, grp1n = 48,
+  grp2m = 780.196, grp2sd = 29.978, grp2n = 48,
+  es.type="g")#rt
+
+v  = as.numeric(e[2])**2
+es = as.numeric(e[1])
+
+
+es
+v
+```
+
+##Li et al. (2021), E2
+
+```{r}
+e = hedge_g_f(0.087, 0.6, 29, 28)
+
+es = e[2]
+  
+v = e[3]
+
+es
+
+v
+```
+
+##Mayer et al. (2004) E1
+
+```{r}
+#retain
+x = c(29,11.3,3.3,33,11.3,3.8)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+#tranfer
+x = c(29,7.1,2.4,33,6.0,1.9)
+e= esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es2 = as.numeric(e[1])
+v2 = as.numeric(e[2])**2
+
+
+v = (v1 + v2 )/2
+es = (es1 + es2 )/2
+
+
+es
+v
+```
+
+##Mayer et al. (2004) E2
+
+```{r}
+#retain
+x = c(14,8.2,3.2,13,9.0,3.7)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+#transfer
+x = c(14,7.8,2.4,13,5.6,2.0)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+
+v = (v1 +v2)/2
+es = (es1 + es2 )/2
+
+
+es
+v
+```
+
+##Mayer et al. (2004) E3
+
+```{r}
+#retain
+x = c(17,11.1,3.9,15,9.6,3.7)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+#transfer
+x = c(17,6.2,2.0,15,4.5,2.3)
+e = esc_mean_sd(
+grp1m = x[2], grp1sd = x[3], grp1n = x[1],
+grp2m = x[5], grp2sd = x[6], grp2n = x[4],
+es.type="g")
+
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+
+v = (v1 +v2)/2
+es = (es1 + es2 )/2
+
+
+es
+v
+```
+
+##Sinatra et al. (2016)
+
+```{r}
+
+#2016-2 standard
+e = esc_mean_sd(
+  grp1m = 204.45, grp1sd = 77.537, grp1n = 38,
+  grp2m = 225.5, grp2sd = 71.672, grp2n = 36,
+  es.type="g")#self vs generic
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 204.45, grp1sd = 77.537, grp1n = 38,
+  grp2m = 184.73, grp2sd = 70.281, grp2n = 37,
+  es.type="g")#self vs popular
+
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+
+#2016-2 difficult
+e = esc_mean_sd(
+  grp1m = 516.74, grp1sd = 140.122, grp1n = 38,
+  grp2m = 545.53, grp2sd = 96.27, grp2n = 36,
+  es.type="g")#self vs generic
+
+es3 = as.numeric(e[1])
+v3  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 516.74, grp1sd = 140.122, grp1n = 38,
+  grp2m = 513, grp2sd = 133.236, grp2n = 37,
+  es.type="g")#self vs popular
+
+es4 = as.numeric(e[1])
+v4  = as.numeric(e[2])**2
+
+es = (es1 + es2 + es3 + es4 )/4
+v = (v1 + v2 + v3 + v4 )/4
+
+es
+v
+```
+
+##Turk et al. (2015) E1
+
+```{r}
+#2015
+#E1
+e = esc_mean_sd(
+  grp1m = 9.68, grp1sd = 2.53, grp1n = 24,
+  grp2m = 7.82, grp2sd = 2.23, grp2n = 23,
+  es.type="g")#length
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 77.08, grp1sd = 27.50, grp1n = 24,
+  grp2m = 58.7, grp2sd = 28.81, grp2n = 23,
+  es.type="g")#spell acc
+
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+
+v = (v1 +v2)/2
+es = (es1 + es2 )/2
+
+
+es
+v
+```
+
+##Turk et al. (2015) E2
+
+```{r}
+#E2
+e = esc_mean_sd(
+  grp1m = 6.08, grp1sd = 1.30, grp1n = 32,
+  grp2m = 5.51, grp2sd = 1.16, grp2n = 32,
+  es.type="g")#length
+
+es1 = as.numeric(e[1])
+v1  = as.numeric(e[2])**2
+
+e = esc_mean_sd(
+  grp1m = 84.1, grp1sd = 23.94, grp1n = 32,
+  grp2m = 74.4, grp2sd = 23.81, grp2n = 32,
+  es.type="g")#spell acc
+
+
+
+es2 = as.numeric(e[1])
+v2  = as.numeric(e[2])**2
+
+v = (v1 +v2)/2
+es = (es1 + es2 )/2
+
+
+es
+v
+```
+
