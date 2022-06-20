@@ -8,8 +8,8 @@ The current repo contains datasheets and scripts used to generate the results in
 - metafor: 3.4-0 # perform ramdom effect model of effect size
 - meta: 5.2-0 # confirm the results with metafor package,perform sensitivity analysis, test for publication bias and subgroup analysis
 ## Datasheets description 
-- [codebook_summary.csv](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/summary%20%26%20codebook_final.xlsx)#codingsheet for the current study
-- [effect_size.csv](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/effect_size.csv) # pre-calculated effect size for each independent sample
+- [codebook&summary](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/summary%20%26%20codebook_final.xlsx) #coding sheet of the current study
+- [effect_size](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/effect_size.csv) # pre-calculated effect size for each independent sample
 ## Scripts description
 - [overall_agreement.Rmd](https://github.com/HelenLiu0609/SPE_edu_meta/tree/main/scripts) #used to calculate the proportion of overall agreement of two raters invloved in the coding procedure
 - [EffectSizeCaculating.Rmd](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/scripts/EffectSizeCaculating.Rmd) #used to calculate effect size for each independent sample
