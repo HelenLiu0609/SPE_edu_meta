@@ -11,7 +11,7 @@ R studio Version 1.4.1717
 - meta: 5.2-0 # confirm the results with metafor package,perform sensitivity analysis, test for publication bias and subgroup analysis
 ## Datasheets description 
 - [codebook&summary](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/summary%20%26%20codebook_final.xlsx) #coding sheet of the current study
-- [effect_size](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/effect_size.csv) # pre-calculated effect size for each independent sample
+- [effect_size](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/datasheets/effect_size.csv) # pre-calculated effect size for each independent sample & targeted moderators 
 ## Scripts description
 - [overall_agreement.Rmd](https://github.com/HelenLiu0609/SPE_edu_meta/tree/main/scripts) #used to calculate the proportion of overall agreement of two raters invloved in the coding procedure
 - [EffectSizeCaculating.Rmd](https://github.com/HelenLiu0609/SPE_edu_meta/blob/main/scripts/EffectSizeCaculating.Rmd) #used to calculate effect size for each independent sample
