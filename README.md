@@ -1,6 +1,6 @@
 # SPE_edu_meta
 ## About 
-The current repo contains materials, datasheets and scripts used to generate the results in the article "The Effectiveness of Self: A Meta-analysis of Using Self-Referential Encoding in Education".
+The current repo contains materials, datasheets and scripts used to generate the results in the article "The effectiveness of self: A meta-analysis of using self-referential encoding techniques in education".
 ## R environment 
 R studio Version 1.4.1717
 
